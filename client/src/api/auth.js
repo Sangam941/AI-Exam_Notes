@@ -5,7 +5,7 @@ import { api } from "./api";
 export const signupUser = async(dispatch, name,email)=>{
     try {
         const response = await api.post('/auth/google', {name, email})
-        // console.log(response.data.user)
+        console.log("logindata:: ",response.data.user)
         dispatch(setUserData(response.data.user))
     } catch (error) {
         throw error

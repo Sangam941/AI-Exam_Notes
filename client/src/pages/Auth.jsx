@@ -3,8 +3,6 @@ import { motion, spring } from "motion/react"
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../utils/firebase';
-import axios from 'axios'
-import { baseUrl } from '../App';
 import { signupUser } from '../api/auth';
 import { useDispatch } from 'react-redux';
 
@@ -50,8 +48,7 @@ const Auth = () => {
             const user = response.user
             const name = user.displayName
             const email = user.email
-
-            console.log(name, email)
+            
             signupUser(dispatch, name, email)
         } catch (error) {
             console.log(error)

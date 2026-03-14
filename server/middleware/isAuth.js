@@ -9,8 +9,7 @@ export const isAuth = async (req, res, next)=>{
         let verifyToken = jwt.verify(token, process.env.JWT_SECRET)
 
         if(!verifyToken) return res.status(400).json({message:"Invalid token!", success:false})
-
-        req.user = verifyToken.userId
+        req.user = verifyToken
 
         next()
     } catch (error) {

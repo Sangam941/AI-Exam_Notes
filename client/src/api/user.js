@@ -7,7 +7,7 @@ export const getCurrentUser = async (dispatch) => {
   try {
     const response = await api.get('/user/current-user');
     dispatch(setUserData(response.data.currentuser))
-    return response.data.currentuser;
+    console.log("after login::", response.data);
   } catch (error) {
     throw error;
   }
