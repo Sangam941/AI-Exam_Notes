@@ -4,12 +4,12 @@ export const promptBuilder = ({ topic, level, examType, revisionMode, diagram, c
 
 Your task is to generate structured notes based on the following inputs:
 
-Topic: {topic}
-Level/Class: {level}
-Exam Type: {examType}
-Revision Mode: {revisionMode}
-Include Diagram: {diagram}
-Include Charts: {charts}
+Topic: ${topic}
+Level/Class: ${level || "Not Specified"}
+Exam Type: ${examType || "General"}
+Revision Mode: ${revisionMode? "TRUE":"FALSE"}
+Include Diagram: ${diagram? "TRUE":"FALSE"}
+Include Charts: ${chart? "TRUE":"FALSE"}
 
 Follow these rules carefully:
 
