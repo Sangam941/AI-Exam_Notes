@@ -1,10 +1,11 @@
 
-const Gemini_Url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview:generateContent"
+const Gemini_Url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent"
 
 
 export async function generateContent(prompt) {
     try {
-        const response = await fetch(`${Gemini_Url}?key=${GEMINI_API_KEY}`, {
+        console.log("gimini api key::", process.env.GEMINI_API_KEY)
+        const response = await fetch(`${Gemini_Url}?key=${process.env.GEMINI_API_KEY}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -18,8 +19,12 @@ export async function generateContent(prompt) {
             })
         });
 
+        console.log("response:: ", response)
+
         if (!response.ok) {
-            throw new Error(`Gemini API error: ${response.statusText}`);
+            const err = await response.text();
+            console.log("err:: ", err)
+            throw new Error(`Gemini API error: ${err}`);
         }
 
         const data = await response.json();

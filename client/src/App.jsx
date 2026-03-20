@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     getCurrentUser(dispatch)
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if (isAuth) navigate("/")

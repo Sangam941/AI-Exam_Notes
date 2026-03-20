@@ -6,7 +6,7 @@ export const getCurrentUser = async (dispatch) => {
   dispatch(setIsAuth())
   try {
     const response = await api.get('/user/current-user');
-    dispatch(setUserData(response.data.currentuser))
+    dispatch(setUserData(response.data.currentUser))
     console.log("after login::", response.data);
   } catch (error) {
     throw error;

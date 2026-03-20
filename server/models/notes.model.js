@@ -21,7 +21,7 @@ const notesSchema = new mongoose.Schema({
         type:Boolean,
         default: false,
     },
-    chart: {
+    charts: {
         type:Boolean,
         default: false,
     },

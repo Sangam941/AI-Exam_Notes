@@ -75,7 +75,7 @@ const Home = () => {
               }}
               transition={{ type: "spring", stiffness: 200 }}
               onClick={()=>navigate('/notes')}
-              className='shadow-[0_20px_45px_rgba(0,0,0,0.6)] font-semibold text-white bg-black/80 rounded-lg px-6 py-2 cursor-pointer'>Get Started</motion.button>
+              className='relative z-10 shadow-[0_20px_45px_rgba(0,0,0,0.6)] font-semibold text-white bg-black/80 rounded-lg px-6 py-2 cursor-pointer'>Get Started</motion.button>
             </div>
           </div>
 
@@ -83,7 +83,7 @@ const Home = () => {
           initial={{x:80, opacity:0}}
           animate={{x:0, opacity:1}}
           transition={{duration:1.5}}
-          className="right">
+          className="right max-sm:mt-10">
               <img src="./home_img.webp" className='-mt-10' alt="this is home image" />
           </motion.div>
         </motion.section>

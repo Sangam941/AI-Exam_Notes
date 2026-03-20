@@ -1,4 +1,4 @@
-export const promptBuilder = ({ topic, level, examType, revisionMode, diagram, chart }) => {
+export const promptBuilder = (topic, level, examType, revisionMode, diagram, chart) => {
     return `
         You are an expert academic assistant designed to generate exam-oriented study notes for students.
 
@@ -92,6 +92,16 @@ Return the response strictly in this JSON format:
   },
   "charts": []
 }
+
+Generate exam-oriented notes in proper markdown format.
+
+Rules:
+- Use # for title
+- Use ## for sections
+- Use bullet points (-)
+- Use **bold** for important terms
+- Keep content structured and readable
+- Do NOT return plain text
 
 Ensure the JSON is valid and properly formatted.
 Return ONLY JSON.

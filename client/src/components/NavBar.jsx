@@ -21,6 +21,8 @@ export const NavBar = () => {
         logoutUser(dispatch)
     }
 
+    console.log(userData)
+
 
     return (
         <motion.header
@@ -42,7 +44,7 @@ export const NavBar = () => {
                         whileHover={{ scale: 1.1 }}
                         transition={{ duration: 0.2 }}
                         className="shadow-[inset_0_0px_3px_rgba(176,175,175,0.3)] cursor-pointer credits flex items-center gap-2 bg-white/10 rounded-full py-2 px-3">
-                        <div>💠<span className='text-sm font-semibold'>{userData.credits}</span></div>
+                        <div>💠<span className='text-sm font-semibold'>{userData?.credits}</span></div>
                         <motion.span
                             whileTap={{ scale: 0.85 }}
                             transition={{ duration: 0.2 }}><CirclePlus size={22} fill='white' stroke='#00000090' className='mt-[2px]' /></motion.span>

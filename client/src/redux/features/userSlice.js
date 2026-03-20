@@ -7,7 +7,7 @@ export const userSlice = createSlice({
         userData: null,
         isAuth: false,
     },
-    reducers:{
+    reducers:{      
         setIsAuth: (state)=>{
             state.userData = null
             state.isAuth = false
@@ -16,8 +16,13 @@ export const userSlice = createSlice({
             state.userData = action.payload
             state.isAuth = true
         },
+        updateCredits: (state, action) => {
+            if (state.userData) {
+                state.userData.credits = action.payload;
+            }
+        }
     }
 }) 
 
-export const {setUserData, setIsAuth} = userSlice.actions
+export const {setUserData, setIsAuth, updateCredits} = userSlice.actions
 export default userSlice.reducer 

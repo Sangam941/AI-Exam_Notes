@@ -1,11 +1,11 @@
-import { NotesModel } from "../models/notes.model"
-import { UserModel } from "../models/user.model"
-import { generateContent } from "../services/Gemini.services"
-import { promptBuilder } from "../utils/promptBuilder"
+import { NotesModel } from "../models/notes.model.js"
+import { UserModel } from "../models/user.model.js"
+import { generateContent } from "../services/Gemini.services.js"
+import { promptBuilder } from "../utils/promptBuilder.js"
 
 export const generateNotes = async(req, res)=>{
     try {
-        const {topic, level, examType, revisionMode, diagram, chart} = req.body
+        const {topic, level, examType, revisionMode, diagram, charts} = req.body
 
         const user = await UserModel.findById(req.user?.userId)
 
@@ -23,9 +23,10 @@ export const generateNotes = async(req, res)=>{
             return res.status(400).json({message: "Insuffecient Credits", success:false})
         }
 
-        const prompt = promptBuilder(topic, level, examType, revisionMode, diagram, chart)
+        const prompt = promptBuilder(topic, level, examType, revisionMode, diagram, charts)
 
-        const aiResponse = generateContent(prompt)
+        const aiResponse = await generateContent(prompt)
+        console.log(aiResponse)
 
         const notes = await NotesModel.create({
             user: user._id,
@@ -34,14 +35,14 @@ export const generateNotes = async(req, res)=>{
             examType,
             revisionMode,
             diagram,
-            chart,
+            charts,
             content: aiResponse
         })
 
         user.credits -= 10
 
         if(user.credits<=0){
-            user.isCreditAvailable = FontFaceSetLoadEvent
+            user.isCreditAvailable = false
         }
 
         user.notes.push(notes._id)
