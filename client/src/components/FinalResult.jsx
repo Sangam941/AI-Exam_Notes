@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { motion } from 'motion/react'
 import ReactMarkdown from 'react-markdown'
 import { Download } from 'lucide-react'
+import MermaidSetup from './MermaidSetup'
+import Recharts from './Recharts'
 
 const FinalResult = ({ notes }) => {
 
@@ -44,6 +46,8 @@ const FinalResult = ({ notes }) => {
 
             <hr />
 
+            <TopicHighliter icon={"📓"} title = {"Detailed Notes"} color = {"green"} />
+
             {!revision && <div className="prose mt-5 px-6">
                 <ReactMarkdown components={markdown}>
                     {notes.notes}
@@ -63,9 +67,45 @@ const FinalResult = ({ notes }) => {
                 </div>
             )}
 
+            {
+                notes?.diagram?.data &&
+                <div className='mt-10'>
+                    <TopicHighliter icon={'📝'} title={'Diagram'} color={'purple'}/>
+                    <MermaidSetup diagram={notes?.diagram?.data} />
+                    <i className='text-gray-500 text-sm ml-5'><span className='font-semibold'>Note:</span> If you need the diagram for the future use then screen shot to save the diagram</i>
+                </div>
+            }
+
+
+            {
+                notes?.charts && notes?.charts.length>0 &&
+                <div className='mt-10'>
+                    <TopicHighliter icon={'📈'} title={'Visual Charts'} color={'orange'}/>
+                    <Recharts charts={notes?.charts} />
+                    <i className='text-gray-500 text-sm ml-5'><span className='font-semibold'>Note:</span> If you need the diagram for the future use then screen shot to save the diagram</i>
+                </div>
+            }
 
         </motion.div>
     )
 }
 
 export default FinalResult
+
+const TopicHighliter = ({icon, title, color}) => {
+    const colors = {
+        green: "from-green-100 to-green-50 text-green-700",
+        purple: "from-purple-100 to-purple-50 text-purple-700",
+        red: "from-red-100 to-red-50 text-red-700",
+        blue: "from-blue-100 to-blue-50 text-blue-700",
+        yellow: "from-yellow-100 to-yellow-50 text-yellow-700",
+        orange: "from-orange-100 to-orange-50 text-orange-700",
+        pink: "from-pink-100 to-pink-50 text-pink-700"
+    }
+    return (
+        <div className={`mt-4 px-3 py-2 flex items-center gap-2 rounded-md text-2xl font-bold bg-gradient-to-r ${colors[color]}`}>
+            <div className="icon">{icon}</div>
+            <div className="text">{title}</div>
+        </div>
+    )
+}
