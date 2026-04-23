@@ -4,8 +4,10 @@ import ReactMarkdown from 'react-markdown'
 import { Download } from 'lucide-react'
 import MermaidSetup from './MermaidSetup'
 import Recharts from './Recharts'
+import { pdfDownloader } from '../api/pdf'
+import removeMarkdown from "remove-markdown";
 
-const FinalResult = ({ notes }) => {
+const FinalResult = ({ notes, title }) => {
 
     const markdown = {
         h1: ({ children }) => (
@@ -26,6 +28,18 @@ const FinalResult = ({ notes }) => {
     }
 
     const [revision, setRevision] = useState(false)
+
+    const handlePdf = async (e)=>{
+        e.stopPropagation()
+
+        // console.log(notes, title="web develoment")
+        // Convert Markdown → plain text
+    const plainText = removeMarkdown(notes.notes);
+
+    console.log("Sending to API:", plainText);
+        
+        await pdfDownloader(plainText, title="web development")
+    }
     return (
         <motion.div className="left w-72 max-md:w-full bg-white py-5 max-w-7xl mt-8 max-md:mt-4 rounded-2xl border border-white/10 shadow-[0_20px_45px_rgba(0,0,0,0.6)] px-4 text-black flex-1">
 
@@ -38,7 +52,9 @@ const FinalResult = ({ notes }) => {
                     >
                         {revision ? "Exit Revision Mode" : "Quick Revision (for exam)"}
                     </button>
-                    <button className="pdf px-3 py-2 rounded-md text-white font-semibold bg-purple-600 flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all">
+                    <button
+                    onClick={(e)=>handlePdf(e)}
+                    className="pdf px-3 py-2 rounded-md text-white font-semibold bg-purple-600 flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all">
                         <Download /> Download PDF
                     </button>
                 </div>

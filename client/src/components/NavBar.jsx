@@ -29,7 +29,7 @@ export const NavBar = () => {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5 }}
-            className='bg-black/80 py-3 max-w-7xl mx-auto mt-8 rounded-2xl backdrop-blur-xl border border-white/10 shadow-[0_20px_45px_rgba(0,0,0,0.6)] px-6 text-white flex items-center justify-between'>
+            className='relative z-100 bg-black/80 py-3 max-w-7xl mx-auto mt-8 rounded-2xl backdrop-blur-xl border border-white/10 shadow-[0_20px_45px_rgba(0,0,0,0.6)] px-6 text-white flex items-center justify-between'>
             <div
                 onClick={() => navigate('/')}
                 className="left flex items-center gap-2 cursor-pointer">
@@ -95,7 +95,7 @@ export const NavBar = () => {
                                 className='flex flex-col absolute bg-black p-2 text-white w-44 right-0 top-15 shadow-[0_25px_45px_rgba(0,0,0,0.6)] rounded-lg'
                             >
 
-                                <MenuItem onClick={() => navigate('/')} text='History' />
+                                <MenuItem onClick={() => navigate('/history')} text='History' />
                                 <div className='w-full h-[1px] bg-gray-800'></div>
                                 <MenuItem onClick={() => handleLogout()} text='Sign-Out' red />
 

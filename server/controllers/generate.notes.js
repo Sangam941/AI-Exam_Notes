@@ -55,3 +55,17 @@ export const generateNotes = async(req, res)=>{
         return res.status(500).json({message: `AI notes generator Error:: ${error}`, success:false})
     }
 }
+
+
+export const notesHistory = async (req,res)=>{
+    try {
+        const userId = req.user.userId
+
+        const allNotes = await NotesModel.find({ user: userId }).sort({ createdAt: -1 });
+   
+        return res.status(200).json({success:true, message: "All notes fetched", allNotes})
+
+    } catch (error) {
+        return res.status(500).json({message: `Fetching all notes:: ${error}`, success:false})
+    }
+}

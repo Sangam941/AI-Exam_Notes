@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateCredits } from '../redux/features/userSlice'
 import Sidebar from './Sidebar'
 import FinalResult from './FinalResult'
-import { setNotes } from '../redux/features/notesSlice'
+import { addNewNotes, setNotes } from '../redux/features/notesSlice'
 
 const FormInput = () => {
     const [topic, setTopic] = useState('')
@@ -40,6 +40,7 @@ const FormInput = () => {
             const result = await generateNotes(payload)
             console.log("result.data:: ",result.data)
             dispatch(setNotes(result.data))
+            dispatch(addNewNotes(result.data))
             setprogressText("Done!");
             setprogressValue(99)
 
@@ -93,12 +94,12 @@ const FormInput = () => {
     }, [loading]);
 
     return (
-        <div className='pb-10'>
+        <div className='relative pb-10'>
             <motion.div
                 initial={{ y: 15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1 }}
-                className='bg-black/80 py-5 max-w-7xl mx-auto mt-8 rounded-2xl backdrop-blur-xl border border-white/10 shadow-[0_20px_45px_rgba(0,0,0,0.6)] px-6 text-white flex items-center justify-between'>
+                className='relative bg-black/80 py-5 max-w-7xl mx-auto mt-8 rounded-2xl backdrop-blur-xl border border-white/10 shadow-[0_20px_45px_rgba(0,0,0,0.6)] px-6 text-white flex items-center justify-between'>
                 <form
                     onSubmit={(e) => handleSubmit(e)}
                     className='flex flex-col w-full gap-5'>
@@ -175,7 +176,7 @@ const FormInput = () => {
             </motion.div>:
             <div className='w-full flex gap-5 max-md:flex-col max-md:items-center max-md:gap-0'>
                 <Sidebar notes={notes}/>
-                <FinalResult notes={notes}/>
+                <FinalResult notes={notes} topic={topic}/>
             </div>
             }
 
