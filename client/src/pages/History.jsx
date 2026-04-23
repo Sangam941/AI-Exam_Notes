@@ -15,10 +15,11 @@ const History = () => {
   const navigate = useNavigate()
   const [isSelected, setIsSelected] = useState(null)
   const [selectedNotes, setselectedNotes] = useState(null)
+  const [showSideBarNotes, setshowSideBarNotes] = useState(false)
 
   useEffect(() => {
     getAllNotes(dispatch)
-  }, [history])
+  }, [dispatch])
 
   useEffect(() => {
     if (history.length > 0 && !selectedNotes && !selectedNotes) {
@@ -31,6 +32,16 @@ const History = () => {
     <div className='min-h-screen max-w-7xl bg-white text-black overflow-hidden mx-auto px-6'>
       <NavBar />
 
+      <div className="flex justify-end my-4 md:hidden">
+        <button
+          className="px-4 py-2 rounded-md cursor-pointer active:scale-95 transition-all bg-green-600 hover:bg-green-700 transition-all text-white font-medium shadow-md"
+          onClick={()=>{setshowSideBarNotes(!showSideBarNotes); console.log(showSideBarNotes)}}
+          >
+          Your Notes
+        </button>
+      </div>
+ 
+
       {/* history notes */}
 
       <div className='relative pb-10 flex gap-5 w-full'>
@@ -40,7 +51,7 @@ const History = () => {
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1 }}
-          className='scrollY relative bg-black/80 py-4 w-1/3 h-142 mt-8 rounded-2xl backdrop-blur-xl border border-white/10 overflow-y-scroll shadow-[0_20px_45px_rgba(0,0,0,0.6)] px-4 text-white'>
+          className={`scrollY  bg-black/80 py-4 h-142 mt-8 rounded-2xl backdrop-blur-xl border border-white/10 overflow-y-scroll shadow-[0_20px_45px_rgba(0,0,0,0.6)] px-4 text-white ${showSideBarNotes? "max-md:block absolute w-full -top-5":"relative max-md:hidden w-1/3"}`}>
 
           <div className='flex items-center justify-between mb-2'>
             <h1 className='font-bold mb-2'>📝 Your Notes</h1>
@@ -51,7 +62,7 @@ const History = () => {
             {history && history.length > 0 && history.map((notes, idx) => {
               return (
                 <div key={idx}
-                onClick={()=>{setIsSelected(notes._id); setselectedNotes(notes)}}
+                onClick={()=>{setIsSelected(notes._id); setselectedNotes(notes); setshowSideBarNotes(false)}}
                 className={`cursor-pointer p-3 flex justify-center gap-1 flex-col rounded-xl  [box-shadow:inset_0_0_5px_rgba(255,255,255,0.2)] ${isSelected === notes._id ? "bg-green-500/60":"bg-white/10"}`}>
                   <div className="title text-white font-semibold">{notes.topic}</div>
                   <div className='flex gap-2'>
