@@ -10,7 +10,6 @@ import FinalResult from '../components/FinalResult'
 const History = () => {
 
   const { history } = useSelector(store => store.note)
-  console.log(history)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()

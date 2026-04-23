@@ -36,7 +36,7 @@ const FinalResult = ({ notes, title }) => {
         // Convert Markdown → plain text
     const plainText = removeMarkdown(notes.notes);
 
-    console.log("Sending to API:", plainText);
+    // console.log("Sending to API:", plainText);
         
         await pdfDownloader(plainText, title="web development")
     }

@@ -38,7 +38,7 @@ const FormInput = () => {
         try {
             setLoading(true);
             const result = await generateNotes(payload)
-            console.log("result.data:: ",result.data)
+            // console.log("result.data:: ",result.data)
             dispatch(setNotes(result.data))
             dispatch(addNewNotes(result.data))
             setprogressText("Done!");

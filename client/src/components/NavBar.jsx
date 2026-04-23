@@ -21,8 +21,6 @@ export const NavBar = () => {
         logoutUser(dispatch)
     }
 
-    console.log(userData)
-
 
     return (
         <motion.header
